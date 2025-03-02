@@ -4,11 +4,9 @@
 
 Desarrollar un juego de exploración de mazmorras en Java que utilice los cuatro pilares de la programación orientada a objetos: encapsulación, herencia, polimorfismo y abstracción. El juego debe incluir clases, interfaces y la interacción entre diferentes tipos de objetos en la mazmorra.
 
-
 **Descripción del Juego**
 
 El jugador debe explorar una mazmorra compuesta de diferentes tipos de salas. Cada sala puede estar vacía, contener un tesoro o albergar un enemigo. El jugador debe navegar por estas salas, recoger objetos y enfrentarse a enemigos, todo mientras intenta mantenerse con vida.
-
 
 **Reglas del Juego**
 
@@ -24,8 +22,6 @@ El jugador debe explorar una mazmorra compuesta de diferentes tipos de salas. Ca
 
 6- El juego termina cuando el jugador ha explorado todas las salas o ha perdido todos sus puntos de vida.
 
-
-
 **Requisitos Técnicos**
 
 1- Interfaces y Abstracción: Define interfaces para las salas y los objetos interactuables en el juego.
@@ -36,35 +32,36 @@ El jugador debe explorar una mazmorra compuesta de diferentes tipos de salas. Ca
 
 4- Polimorfismo: Usa referencias de las interfaces para manejar los diferentes tipos de salas y objetos en el juego.
 
-
-
 **Especificaciones Detalladas**
 
 Paso 1: Crear las interfaces básicas
-  - Define una interfaz Room para representar una sala en la mazmorra.
-  - Define una interfaz GameObject para representar objetos interactuables en la mazmorra.
+
+- Define una interfaz Room para representar una sala en la mazmorra.
+- Define una interfaz GameObject para representar objetos interactuables en la mazmorra.
 
 Paso 2: Crear la clase Player
-  - Define una clase Player que encapsule los datos y comportamientos del jugador.
-  - La clase debe incluir atributos como name, health, e inventory.
-  - Proporciona métodos para que el jugador pueda recibir daño, recoger objetos y mostrar su estado actual.
+
+- Define una clase Player que encapsule los datos y comportamientos del jugador.
+- La clase debe incluir atributos como name, health, e inventory.
+- Proporciona métodos para que el jugador pueda recibir daño, recoger objetos y mostrar su estado actual.
 
 Paso 3: Crear clases concretas de Room
-  - Crea una clase EmptyRoom que represente una sala vacía.
-  - Crea una clase TreasureRoom que represente una sala con un tesoro.
-  - Crea una clase EnemyRoom que represente una sala con un enemigo.
+
+- Crea una clase EmptyRoom que represente una sala vacía.
+- Crea una clase TreasureRoom que represente una sala con un tesoro.
+- Crea una clase EnemyRoom que represente una sala con un enemigo.
 
 Paso 4: Crear la clase principal del juego
-  - Define una clase principal que inicialice el jugador y una serie de salas.
-  - Implementa un bucle que permita al jugador moverse por las salas.
-  - Maneja las interacciones del jugador con las salas y los objetos.
+
+- Define una clase principal que inicialice el jugador y una serie de salas.
+- Implementa un bucle que permita al jugador moverse por las salas.
+- Maneja las interacciones del jugador con las salas y los objetos.
 
 **Instrucciones Adicionales**
-  - Asegúrate de manejar adecuadamente las interacciones entre el jugador y los diferentes tipos de salas.
-  - Considera agregar más salas y enemigos para hacer el juego más interesante.
-  - Puedes implementar características adicionales como la posibilidad de que el jugador use objetos del inventario.
 
-
+- Asegúrate de manejar adecuadamente las interacciones entre el jugador y los diferentes tipos de salas.
+- Considera agregar más salas y enemigos para hacer el juego más interesante.
+- Puedes implementar características adicionales como la posibilidad de que el jugador use objetos del inventario.
 
 # 🏰 DungeonGame
 
@@ -87,33 +84,33 @@ Paso 4: Crear la clase principal del juego
 
 ---
 
-## 📝 Descripción **DungeonGame**
+## 📝 Descripción
 
-**Historia del Juego** 
+**Historia del Juego**
 
 En el reino del código se extiende una leyenda acerca de un poderoso error, un bug ancestral que perturba la armonía de los programas y sistemas. La única esperanza para restaurar la paz es encontrar la llave del tesoro, que desbloquea el conocimiento y soluciona el gran bug.
 
 El jugador, que puede ser Héroe o Heroína, asume el rol de un programador en formación que inicia como Trainee y, tras enfrentar numerosos desafíos, sube a Junior y finalmente a Senior. En su travesía, se encontrará con salas vacías, tesoros (herramientas como Git, IntelliJ, Maven, entre otras, que recuperan vida) y enemigos (los temibles Bugs) que lo desafiarán con preguntas de Java.
 
-
 ---
 
 ## 🗂️ Estructura del Proyecto
 
-| Archivo/Directorio | Descripción |
-|-------------------|-------------|
-| **main.java** | 📄 Archivo principal ubicado en `DungeonGame/` para fácil acceso |
-| **package player** | 👤 Contiene `Player` y las clases de acciones como `ActionPlayer` y `MovePlayer` |
-| **package rooms** | 🚪 Implementaciones de salas (EmptyRoom, TreasureRoom, EnemyRoom) |
-| **package objects** | 🎒 Alberga la interfaz `GameObject` |
-| **package enemies** | 👾 Contiene la clase `BugEnemy` |
-| **package questions** | ❓ Gestiona las preguntas y pools para niveles Trainee y Junior |
+| Archivo/Directorio    | Descripción                                                                      |
+| --------------------- | -------------------------------------------------------------------------------- |
+| **main.java**         | 📄 Archivo principal ubicado en `DungeonGame/` para fácil acceso                 |
+| **package player**    | 👤 Contiene `Player` y las clases de acciones como `ActionPlayer` y `MovePlayer` |
+| **package rooms**     | 🚪 Implementaciones de salas (EmptyRoom, TreasureRoom, EnemyRoom)                |
+| **package objects**   | 🎒 Alberga la interfaz `GameObject`                                              |
+| **package enemies**   | 👾 Contiene la clase `BugEnemy`                                                  |
+| **package questions** | ❓ Gestiona las preguntas y pools para niveles Trainee y Junior                  |
 
 ---
 
 ## 💻 Instalación
 
 1. Clona el repositorio:
+
    ```bash
    https://github.com/Generation-Chile-Java/dungeonexplorer-gperzal.git
    ```
@@ -171,7 +168,6 @@ java -cp bin Main
 | `Junior` | Nivel intermedio, con desafíos y preguntas más complejas. |
 | `Senior` | Nivel final, el objetivo del juego, alcanzado cuando se dominan los fundamentos del código. |
 
-
 ---
 
 ## ✨ Características
@@ -181,7 +177,6 @@ java -cp bin Main
 - 💰 **Búsqueda de tesoros**: Recolecta valiosos objetos durante tu aventura
 - 📈 **Progresión por niveles**: Avanza a través de dificultades Trainee y Junior
 - 🔄 **Sistema de guardado**: Guarda tu progreso y continúa tu aventura más tarde
-
 
 ---
 
