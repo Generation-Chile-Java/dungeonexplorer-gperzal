@@ -76,7 +76,7 @@ Paso 4: Crear la clase principal del juego
 ## 📋 Tabla de Contenidos
 
 - [Descripción](#-descripción)
-- [Estructura del Proyecto](#-estructura-del-proyecto)
+- [Estructura del Proyecto](#-estructura)
 - [Instalación](#-instalación)
 - [Cómo Jugar](#-cómo-jugar)
 - [Características](#-características)
@@ -94,7 +94,7 @@ El jugador, que puede ser Héroe o Heroína, asume el rol de un programador en f
 
 ---
 
-## 🗂️ Estructura del Proyecto
+## 🗂️ Estructura
 
 | Archivo/Directorio    | Descripción                                                                      |
 | --------------------- | -------------------------------------------------------------------------------- |
