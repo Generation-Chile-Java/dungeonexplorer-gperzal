@@ -63,3 +63,138 @@ Paso 4: Crear la clase principal del juego
   - Asegúrate de manejar adecuadamente las interacciones entre el jugador y los diferentes tipos de salas.
   - Considera agregar más salas y enemigos para hacer el juego más interesante.
   - Puedes implementar características adicionales como la posibilidad de que el jugador use objetos del inventario.
+
+
+
+# 🏰 DungeonGame
+
+> Un juego de mazmorras basado en texto donde los jugadores exploran habitaciones, enfrentan enemigos y buscan tesoros.
+
+[![Java](https://img.shields.io/badge/Java-8%2B-orange)](https://www.java.com/)
+[![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-En%20Desarrollo-green)](STATUS)
+
+---
+
+## 📋 Tabla de Contenidos
+
+- [Descripción](#-descripción)
+- [Estructura del Proyecto](#-estructura-del-proyecto)
+- [Instalación](#-instalación)
+- [Cómo Jugar](#-cómo-jugar)
+- [Características](#-características)
+- [Requisitos del Sistema](#-requisitos-del-sistema)
+- [Contribuir](#-contribuir)
+- [Licencia](#-licencia)
+
+---
+
+## 📝 Descripción **DungeonGame**
+
+**Historia del Juego** 
+
+En el reino del código se extiende una leyenda acerca de un poderoso error, un bug ancestral que perturba la armonía de los programas y sistemas. La única esperanza para restaurar la paz es encontrar la llave del tesoro, que desbloquea el conocimiento y soluciona el gran bug.
+
+El jugador, que puede ser Héroe o Heroína, asume el rol de un programador en formación que inicia como Trainee y, tras enfrentar numerosos desafíos, sube a Junior y finalmente a Senior. En su travesía, se encontrará con salas vacías, tesoros (herramientas como Git, IntelliJ, Maven, entre otras, que recuperan vida) y enemigos (los temibles Bugs) que lo desafiarán con preguntas de Java.
+
+
+---
+
+## 🗂️ Estructura del Proyecto
+
+| Archivo/Directorio | Descripción |
+|-------------------|-------------|
+| **main.java** | 📄 Archivo principal ubicado en `DungeonGame/` para fácil acceso |
+| **package player** | 👤 Contiene `Player` y las clases de acciones como `ActionPlayer` y `MovePlayer` |
+| **package rooms** | 🚪 Implementaciones de salas (EmptyRoom, TreasureRoom, EnemyRoom) |
+| **package objects** | 🎒 Alberga la interfaz `GameObject` |
+| **package enemies** | 👾 Contiene la clase `BugEnemy` |
+| **package questions** | ❓ Gestiona las preguntas y pools para niveles Trainee y Junior |
+
+---
+
+## 💻 Instalación
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/usuario/DungeonGame.git
+   ```
+
+2. Navega al directorio del proyecto:
+   ```bash
+   cd DungeonGame
+   ```
+
+---
+
+## 🎮 Cómo Jugar
+
+### 🚀 Ejecutar el Juego
+
+Desde la raíz del proyecto, compila y ejecuta la clase `Main.java`:
+
+```bash
+mkdir -p bin
+javac -d bin src/**/*.java
+java -cp bin Main
+```
+
+> **Nota**: Asegúrate de tener configurado correctamente tu entorno Java.
+
+### 🕹️ Mecánicas del Juego
+
+**Movimiento y Comandos**
+| Comando | Acción |
+|---------|--------|
+| `A` | Moverse a la izquierda|
+| `W` | Moverse hacia arriba |
+| `D` | Moverse a la derecha |
+| `S` | Moverse hacia abajo |
+
+**Interacción**
+| Comando | Acción |
+|---------|--------|
+| `F` | Acción (usar en caso de encontrar cobres, paredes, puertas o enemigos)|
+| `E` | Mostrar el siguiente texto |
+| `Q` | Mostrar el texto anterior |
+| `V` | Abrir el inventario|
+| `X` | Usar objeto del inventario|
+
+**Tipos de Objetos**
+| Comando | Acción |
+|---------|--------|
+| `Tesoros` | Representan herramientas como Git, IntelliJ, Maven, etc. que ayudan a recuperar puntos de vida.|
+| `Llaves` | Utilizadas para abrir puertas y avanzar en la mazmorra. |
+
+**Niveles del Jugador**
+| Comando | Acción |
+|---------|--------|
+| `Trainee` | Nivel inicial, donde se enfrentan preguntas básicas.|
+| `Junior` | Nivel intermedio, con desafíos y preguntas más complejas. |
+| `Senior` | Nivel final, el objetivo del juego, alcanzado cuando se dominan los fundamentos del código. |
+
+
+---
+
+## ✨ Características
+
+- 🧭 **Exploración dinámica**: Descubre diferentes tipos de habitaciones con desafíos únicos
+- ⚔️ **Sistema de combate basado en conocimiento**: Responde preguntas técnicas para derrotar enemigos
+- 💰 **Búsqueda de tesoros**: Recolecta valiosos objetos durante tu aventura
+- 📈 **Progresión por niveles**: Avanza a través de dificultades Trainee y Junior
+- 🔄 **Sistema de guardado**: Guarda tu progreso y continúa tu aventura más tarde
+
+
+---
+
+## 📜 Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+---
+
+<div align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="DungeonGame Logo Java" width="50" height="50" />
+  <p>Desarrollado con ❤️ por GXPZ Developer</p>
+  <p>© 2025 DungeonGame</p>
+</div>

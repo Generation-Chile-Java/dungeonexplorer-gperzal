@@ -1,0 +1,233 @@
+{
+  "intro": {
+    "hero": "¡Bienvenido, valiente Héroe {name}! Tu misión es encontrar la llave del tesoro y dominar los bugs que amenazan nuestro reino del código.",
+    "heroine": "¡Bienvenida, valiente Heroína {name}! Tu misión es encontrar la llave del tesoro y dominar los bugs que amenazan nuestro reino del código."
+  },
+  "dialogues": {
+    "trainee": {
+      "questions": [
+        {
+          "question": "¿Qué error se produce en: System.out.print(Hola Mundo)?",
+          "answers": [
+            "Error de comillas",
+            "Error de punto y coma",
+            "Ambos"
+          ],
+          "correct": 2,
+          "feedback": [
+            "Recuerda que el texto debe ir entre comillas.",
+            "El punto y coma es obligatorio para terminar la sentencia.",
+            "¡Correcto! Ambos errores son comunes en este ejemplo."
+          ]
+        },
+        {
+          "question": "¿Cuál es la sintaxis correcta para declarar una variable en Java?",
+          "answers": [
+            "int variable = 10;",
+            "int variable == 10;",
+            "int variable := 10;"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! Se usa el símbolo = para asignar valores.",
+            "El operador == se utiliza para comparar, no para asignar.",
+            "El operador := no es válido en Java."
+          ]
+        },
+        {
+          "question": "¿Cómo se inicia un bloque de código en Java?",
+          "answers": [
+            "Con {",
+            "Con (",
+            "Con ["
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! Se inicia un bloque de código con llaves {}.",
+            "Los paréntesis se usan para métodos y expresiones.",
+            "Los corchetes se utilizan para arrays."
+          ]
+        },
+        {
+          "question": "¿Qué palabra clave se utiliza para definir una clase en Java?",
+          "answers": [
+            "class",
+            "Class",
+            "clase"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! La palabra clave es 'class' en minúsculas.",
+            "Recuerda que en Java las palabras clave son sensibles a mayúsculas.",
+            "La opción 'clase' no es válida en Java."
+          ]
+        },
+        {
+          "question": "¿Qué método se utiliza para leer datos desde la consola en Java?",
+          "answers": [
+            "System.in.read()",
+            "Scanner.next()",
+            "Console.read()"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Ese método no es el más habitual para la lectura de la consola.",
+            "¡Correcto! Se utiliza la clase Scanner.",
+            "No existe un método llamado Console.read() en Java estándar."
+          ]
+        }
+      ]
+    },
+    "junior": {
+      "questions": [
+        {
+          "question": "¿Qué método se utiliza para imprimir una línea en consola en Java?",
+          "answers": [
+            "System.out.print()",
+            "System.out.println()",
+            "Console.log()"
+          ],
+          "correct": 1,
+          "feedback": [
+            "Incorrecto, este método imprime sin salto de línea.",
+            "¡Correcto! System.out.println() imprime con salto de línea.",
+            "Console.log() no forma parte de Java."
+          ]
+        },
+        {
+          "question": "¿Cómo se declara un arreglo en Java?",
+          "answers": [
+            "int[] arr = new int[5];",
+            "int arr = new int[5];",
+            "array arr = new int[5];"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! Se declara de la forma int[] arr = new int[5];",
+            "Recuerda que los arreglos en Java se definen con [].",
+            "La palabra 'array' no es válida en Java."
+          ]
+        },
+        {
+          "question": "¿Qué modificador de acceso permite que una variable sea accesible solo dentro de su clase?",
+          "answers": [
+            "private",
+            "public",
+            "protected"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! 'private' restringe el acceso a la clase.",
+            "El modificador 'public' permite acceso desde cualquier parte.",
+            "El modificador 'protected' permite acceso a clases derivadas."
+          ]
+        },
+        {
+          "question": "¿Qué palabra clave se utiliza para heredar de una clase en Java?",
+          "answers": [
+            "extends",
+            "implements",
+            "inherits"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! Se utiliza 'extends' para heredar de una clase.",
+            "La palabra 'implements' se utiliza para implementar interfaces.",
+            "La palabra 'inherits' no existe en Java."
+          ]
+        },
+        {
+          "question": "¿Cómo se define una interfaz en Java?",
+          "answers": [
+            "interface Nombre {}",
+            "class Nombre {}",
+            "abstract Nombre {}"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! Las interfaces se definen con la palabra clave 'interface'.",
+            "Una clase no es una interfaz.",
+            "El modificador abstract no se utiliza para definir interfaces."
+          ]
+        }
+      ]
+    },
+    "senior": {
+      "questions": [
+        {
+          "question": "¿Qué característica de la POO permite utilizar el mismo método en diferentes clases?",
+          "answers": [
+            "Polimorfismo",
+            "Encapsulamiento",
+            "Herencia"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! El polimorfismo permite esa flexibilidad.",
+            "El encapsulamiento se refiere a la ocultación de datos.",
+            "La herencia permite extender funcionalidades, pero no reutilizar el mismo método de forma polimórfica."
+          ]
+        },
+        {
+          "question": "¿Cuál es la ventaja principal de usar interfaces en Java?",
+          "answers": [
+            "Fomentan el desacoplamiento y la abstracción",
+            "Aumentan el acoplamiento entre clases",
+            "Hacen el código más largo"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! Las interfaces permiten desacoplar componentes y promover la abstracción.",
+            "Al contrario, las interfaces ayudan a disminuir el acoplamiento.",
+            "El objetivo es escribir código limpio y modular, no más extenso."
+          ]
+        },
+        {
+          "question": "¿Qué es el 'polimorfismo' en el contexto de la programación orientada a objetos?",
+          "answers": [
+            "La capacidad de un objeto para tomar muchas formas",
+            "La capacidad de heredar atributos de múltiples clases",
+            "La capacidad de encapsular datos"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! El polimorfismo permite que un objeto se comporte de diferentes maneras según su contexto.",
+            "Java no soporta herencia múltiple, por lo tanto esta opción es incorrecta.",
+            "El encapsulamiento es un concepto diferente."
+          ]
+        },
+        {
+          "question": "¿Qué significa encapsulación en POO?",
+          "answers": [
+            "Ocultar los detalles internos y exponer solo lo necesario",
+            "Heredar de una clase base",
+            "Permitir múltiples formas de un método"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! La encapsulación es la práctica de ocultar los detalles internos.",
+            "La herencia es otro concepto de la POO.",
+            "Eso se refiere al polimorfismo, no a la encapsulación."
+          ]
+        },
+        {
+          "question": "¿Cuál es el objetivo principal de la abstracción en POO?",
+          "answers": [
+            "Simplificar la complejidad mediante modelos",
+            "Complejizar el código",
+            "Reducir la reutilización"
+          ],
+          "correct": 0,
+          "feedback": [
+            "¡Correcto! La abstracción busca simplificar la complejidad del sistema.",
+            "El objetivo es justamente lo opuesto.",
+            "La reutilización es un beneficio de otros conceptos, pero no el principal objetivo de la abstracción."
+          ]
+        }
+      ]
+    },
+    "final": {
+      "message": "¡Felicidades, {name}! Has completado los desafíos del reino del código, demostrando tu valía desde el nivel Trainee, pasando por Junior, hasta alcanzar el estatus Senior. Ahora estás listo para dar el siguiente paso: asumir roles de liderazgo en proyectos ambiciosos y enfrentar nuevas aventuras en el mundo del desarrollo. ¡Adelante, el futuro te espera!"
+    }
+  }
+}
