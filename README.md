@@ -83,8 +83,6 @@ Paso 4: Crear la clase principal del juego
 - [Instalación](#-instalación)
 - [Cómo Jugar](#-cómo-jugar)
 - [Características](#-características)
-- [Requisitos del Sistema](#-requisitos-del-sistema)
-- [Contribuir](#-contribuir)
 - [Licencia](#-licencia)
 
 ---
@@ -117,7 +115,7 @@ El jugador, que puede ser Héroe o Heroína, asume el rol de un programador en f
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/usuario/DungeonGame.git
+   https://github.com/Generation-Chile-Java/dungeonexplorer-gperzal.git
    ```
 
 2. Navega al directorio del proyecto:
@@ -195,6 +193,6 @@ Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 
 <div align="center">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="DungeonGame Logo Java" width="50" height="50" />
-  <p>Desarrollado con ❤️ por GXPZ Developer</p>
+  <p>Desarrollado con ❤️ por GXPZ Developer Full Stack</p>
   <p>© 2025 DungeonGame</p>
 </div>
