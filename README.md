@@ -168,6 +168,38 @@ java -cp bin Main
 | `Junior` | Nivel intermedio, con desafíos y preguntas más complejas. |
 | `Senior` | Nivel final, el objetivo del juego, alcanzado cuando se dominan los fundamentos del código. |
 
+### 🗺️ Mapas
+
+**Mapa Trainee:**
+
+- Sala Principal: Punto de inicio.
+- Desde la Sala Principal, hacia la derecha se conecta a Habitación1, que contiene la "Secreta la llave".
+- Desde Habitación1, hacia arriba se conecta a Habitación Secreta, que contiene el "tesoro del conocimiento".
+- Desde la Habitación Secreta, hacia arriba se transita al siguiente nivel: Desarrollador Junior.
+
+**Mapa Junior:**
+
+- Sala Principal: Punto de inicio.
+- Desde la Sala Principal, hacia la derecha se conecta a Habitación1 (con "Tesoro Falso").
+- Desde Habitación1, hacia la derecha se conecta a Habitación2 (con "Tesoro verdadero").
+- Se permite regresar de Habitación2 a Habitación1 (hacia la izquierda) y de Habitación1 a Sala Principal (hacia la izquierda).
+- Desde la Sala Principal, hacia arriba se conecta a Habitación Secreta (inicialmente bloqueada, que contiene el "tesoro del conocimiento").
+- Desde la Habitación Secreta, hacia arriba se transita al siguiente nivel: Desarrollador Senior.
+
+**Mapa Senior:**
+
+- Sala Principal: Punto de inicio, con la puerta del conocimiento bloqueada.
+- Desde la Sala Principal, hacia la izquierda se conecta a Sala Exterior.
+- Desde Sala Exterior, hacia la izquierda se conecta a Campos Elíseos (que contiene la "llave secreta de snippet").
+- Se permite regresar de Campos Elíseos a Sala Exterior (hacia la derecha) y de Sala - Exterior a Sala Principal (hacia la derecha).
+- Desde la Sala Principal, hacia la derecha se conecta a Habitación1 (con puerta bloqueada, que requiere la llave de snippet).
+- Desde Habitación1, hacia la derecha se conecta a Habitación Secreta (que contiene una llave).
+- Desde Habitación Secreta, hacia arriba se conecta a Habitación2 (vacía, sin utilidad).
+- Desde Habitación2, se puede regresar a Habitación Secreta (hacia abajo).
+- Desde Habitación Secreta, hacia abajo se conecta a Habitación3 (que contiene la "llave del conocimiento").
+- Se permite regresar de Habitación3 a Habitación Secreta (hacia arriba), de Habitación - Secreta a Habitación1 (hacia la izquierda) y, finalmente, de Habitación1 a Sala Principal (hacia la izquierda).
+- Finalmente, en Sala Principal se utilizará la "llave del conocimiento" para desbloquear la puerta del conocimiento y obtener el "Tesoro del Conocimiento" (FIN DEL JUEGO).
+
 ---
 
 ## ✨ Características
