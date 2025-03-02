@@ -76,7 +76,7 @@ Paso 4: Crear la clase principal del juego
 ## 📋 Tabla de Contenidos
 
 - [Descripción](#-descripción)
-- [Estructura del Proyecto](#-estructura)
+- [Estructura](#-estructura)
 - [Instalación](#-instalación)
 - [Cómo Jugar](#-cómo-jugar)
 - [Características](#-características)
