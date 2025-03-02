@@ -58,7 +58,8 @@ public class Main {
 
         // Introducción y selección de género y nombre
         System.out.println("¡Bienvenido al Dungeon Game!");
-        System.out.println("Selecciona tu género: 1) Héroe  2) Heroína");
+        System.out.println("\n1) Héroe  \n2) Heroína");
+        System.out.print("Selecciona tu género: ");
         String genderChoice = scanner.nextLine();
         String gender = genderChoice.equals("1") ? "Héroe" : "Heroína";
         System.out.print("Introduce tu nombre: ");
@@ -110,12 +111,30 @@ public class Main {
                 case "X":
                     // Intentar desbloquear puerta bloqueada
                     if(lastLockedDoor != null) {
-                        if(inventory.contains(lastLockedDoor.requiredKey)) {
-                            System.out.println("¡Has usado " + lastLockedDoor.requiredKey + " para desbloquear la puerta!");
-                            transitionDoor(lastLockedDoor);
-                            lastLockedDoor = null;
+                        if(lastLockedDoor.requiredKey.contains(",")) {
+                            String[] keys = lastLockedDoor.requiredKey.split(",");
+                            boolean hasAll = true;
+                            for(String k : keys) {
+                                if(!inventory.contains(k.trim())) {
+                                    hasAll = false;
+                                    break;
+                                }
+                            }
+                            if(hasAll) {
+                                System.out.println("¡Has usado tus llaves (" + lastLockedDoor.requiredKey + ") para desbloquear la puerta!");
+                                transitionDoor(lastLockedDoor);
+                                lastLockedDoor = null;
+                            } else {
+                                System.out.println("No tienes todos los ítems necesarios para desbloquear la puerta.");
+                            }
                         } else {
-                            System.out.println("No tienes el item necesario para desbloquear la puerta.");
+                            if(inventory.contains(lastLockedDoor.requiredKey)) {
+                                System.out.println("¡Has usado " + lastLockedDoor.requiredKey + " para desbloquear la puerta!");
+                                transitionDoor(lastLockedDoor);
+                                lastLockedDoor = null;
+                            } else {
+                                System.out.println("No tienes el item necesario para desbloquear la puerta.");
+                            }
                         }
                     } else {
                         System.out.println("No hay ninguna puerta bloqueada a desbloquear.");
@@ -124,7 +143,6 @@ public class Main {
                 default:
                     System.out.println("Comando no reconocido.");
             }
-            // Aquí se podrían agregar verificaciones adicionales (por ejemplo, si health <= 0).
         }
 
         scanner.close();
@@ -187,18 +205,34 @@ public class Main {
                 System.out.println("No puedes moverte en esa dirección.");
                 return false;
             } else {
-                // Si la puerta requiere llave y el inventario NO la tiene:
-                if(door.requiredKey != null && !inventory.contains(door.requiredKey)) {
-                    System.out.println("La puerta está bloqueada. Necesitas " + door.requiredKey + " para abrirla.");
-                    return false;
-                }
-                // Si la puerta requiere llave, queremos que el jugador use "X" para desbloquearla
+                // Si la puerta requiere llave...
                 if(door.requiredKey != null) {
-                    lastLockedDoor = door;
-                    System.out.println("La puerta está bloqueada. Usa 'X' para usar tu llave " + door.requiredKey + " y desbloquearla.");
-                    return false;
+                    if(door.requiredKey.contains(",")) {
+                        // Verificar cada llave requerida
+                        String[] keys = door.requiredKey.split(",");
+                        boolean hasAll = true;
+                        for(String k : keys) {
+                            if(!inventory.contains(k.trim())) {
+                                hasAll = false;
+                                System.out.println("La puerta final está bloqueada. Necesitas " + door.requiredKey + " para abrirla.");
+                                break;
+                            }
+                        }
+                        if(!hasAll) return false;
+                        lastLockedDoor = door;
+                        System.out.println("La puerta final está bloqueada. Usa 'X' para usar tus llaves (" + door.requiredKey + ") y desbloquearla.");
+                        return false;
+                    } else {
+                        if(!inventory.contains(door.requiredKey)) {
+                            System.out.println("La puerta está bloqueada. Necesitas " + door.requiredKey + " para abrirla.");
+                            return false;
+                        }
+                        lastLockedDoor = door;
+                        System.out.println("La puerta está bloqueada. Usa 'X' para usar tu llave " + door.requiredKey + " y desbloquearla.");
+                        return false;
+                    }
                 }
-                // Si la puerta no requiere llave, se realiza la transición automáticamente
+                // Si la puerta no requiere llave, se realiza la transición automáticamente.
                 transitionDoor(door);
                 return false;
             }
@@ -207,6 +241,15 @@ public class Main {
 
     // Realiza la transición de puerta: si hay cambio de nivel o solo de sala.
     private static void transitionDoor(DoorInfo door) {
+        if(door.targetRoom.equals("Salida Final")) {
+            // Mostrar mensaje final personalizado (reemplazando {name})
+            String finalMessage = gameTexts.getAsJsonObject("dialogues")
+                    .getAsJsonObject("final")
+                    .get("message").getAsString();
+            finalMessage = finalMessage.replace("{name}", playerName);
+            System.out.println(finalMessage);
+            System.exit(0);
+        }
         if(door.nextLevel != null) {
             System.out.println("¡Has transitado al siguiente nivel: " + door.nextLevel + "!");
             currentLevel = door.nextLevel;
@@ -226,7 +269,6 @@ public class Main {
         // En la Sala Principal del nivel Senior, si se tiene "llave del conocimiento", se finaliza el juego.
         if(currentLevel.equals("Senior") && currentRoom.equals("Sala Principal") && currentRow == 1 && currentCol == 1) {
             if(inventory.contains("llave del conocimiento")) {
-                // Mostrar mensaje final usando JSON (reemplazando {name})
                 String finalMessage = gameTexts.getAsJsonObject("dialogues")
                         .getAsJsonObject("final")
                         .get("message").getAsString();
@@ -247,7 +289,6 @@ public class Main {
                     inventory.add(content);
                     collectedRooms.add(key);
                 } else {
-                    // Si la sala está vacía, se lanza un encuentro enemigo (con 30% de probabilidad)
                     double chance = Math.random();
                     if(chance < 0.3) {
                         enemyEncounter();
@@ -256,7 +297,6 @@ public class Main {
                     }
                 }
             } else {
-                // Si ya se exploró la sala y está vacía, se puede intentar un encuentro enemigo (aleatorio)
                 double chance = Math.random();
                 if(chance < 0.3) {
                     enemyEncounter();
@@ -272,8 +312,6 @@ public class Main {
     // Simula un encuentro con un enemigo (Bug 👾) utilizando el pool de preguntas del JSON según el nivel.
     private static void enemyEncounter() {
         System.out.println("¡Te has encontrado con un enemigo: Bug 👾!");
-        // Se usa el pool de preguntas del JSON a través de la clase QuestionPool.
-        // Se asume que QuestionPool.askQuestionForLevel(String level) devuelve true si la respuesta es correcta.
         boolean correct = questions.QuestionPool.askQuestionForLevel(currentLevel);
         if (!correct) {
             health--;
@@ -288,113 +326,93 @@ public class Main {
     }
 
     // Define la información de las puertas según el nivel, sala, dirección y posición actual.
-    // Se asume que cada sala es una matriz 3x3.
     private static DoorInfo getDoorInfo(String level, String room, String direction, int row, int col) {
         // --- MAPA TRAINEE ---
         if(level.equals("Trainee")) {
-            // Desde Sala Principal: si estás en (1,2) y presionas D, transita a Habitacion1 (aparece en (1,0)) sin bloqueo.
             if(room.equals("Sala Principal") && direction.equals("D") && row == 1 && col == 2) {
                 return new DoorInfo("Habitacion1", 1, 0, null, null);
             }
-            // Bidireccional: Desde Habitacion1: si estás en (1,0) y presionas A, regresa a Sala Principal (aparece en (1,2)).
             if(room.equals("Habitacion1") && direction.equals("A") && row == 1 && col == 0) {
                 return new DoorInfo("Sala Principal", 1, 2, null, null);
             }
-            // Desde Habitacion1: si estás en (0,1) y presionas W, transita a Habitacion Secreta (aparece en (2,1)); requiere "llave secreta".
             if(room.equals("Habitacion1") && direction.equals("W") && row == 0 && col == 1) {
                 return new DoorInfo("Habitacion Secreta", 2, 1, "llave secreta", null);
             }
-            // Bidireccional: Desde Habitacion Secreta: si estás en (2,1) y presionas S, regresa a Habitacion1 (aparece en (0,1)).
             if(room.equals("Habitacion Secreta") && direction.equals("S") && row == 2 && col == 1) {
                 return new DoorInfo("Habitacion1", 0, 1, null, null);
             }
-            // Desde Habitacion Secreta: si estás en (0,1) y presionas W, transita al siguiente nivel (Junior).
             if(room.equals("Habitacion Secreta") && direction.equals("W") && row == 0 && col == 1) {
                 return new DoorInfo("Sala Principal", 1, 1, null, "Junior");
             }
         }
         // --- MAPA JUNIOR ---
         if(level.equals("Junior")) {
-            // Desde Sala Principal: en (1,2) y D transita a Habitacion1 (aparece en (1,0)); requiere "Tesoro Falso".
             if(room.equals("Sala Principal") && direction.equals("D") && row == 1 && col == 2) {
-                return new DoorInfo("Habitacion1", 1, 0, "Tesoro Falso", null);
+                return new DoorInfo("Habitacion1", 1, 0, null, null);
             }
-            // Bidireccional: Desde Habitacion1: en (1,0) y A regresa a Sala Principal (aparece en (1,2)).
             if(room.equals("Habitacion1") && direction.equals("A") && row == 1 && col == 0) {
                 return new DoorInfo("Sala Principal", 1, 2, null, null);
             }
-            // Desde Habitacion1: en (1,2) y D transita a Habitacion2 (aparece en (1,0)); requiere "Tesoro verdadero".
             if(room.equals("Habitacion1") && direction.equals("D") && row == 1 && col == 2) {
-                return new DoorInfo("Habitacion2", 1, 0, "Tesoro verdadero", null);
+                return new DoorInfo("Habitacion2", 1, 0, null, null);
             }
-            // Bidireccional: Desde Habitacion2: en (1,0) y A regresa a Habitacion1 (aparece en (1,2)).
             if(room.equals("Habitacion2") && direction.equals("A") && row == 1 && col == 0) {
                 return new DoorInfo("Habitacion1", 1, 2, null, null);
             }
-            // Desde Sala Principal: en (0,1) y W transita a Habitacion Secreta (aparece en (2,1)); requiere "llave secreta".
             if(room.equals("Sala Principal") && direction.equals("W") && row == 0 && col == 1) {
-                return new DoorInfo("Habitacion Secreta", 2, 1, "llave secreta", null);
+                return new DoorInfo("Habitacion Secreta", 2, 1, "Tesoro verdadero", null);
             }
-            // Bidireccional: Desde Habitacion Secreta: en (2,1) y S regresa a Sala Principal (aparece en (0,1)).
             if(room.equals("Habitacion Secreta") && direction.equals("S") && row == 2 && col == 1) {
                 return new DoorInfo("Sala Principal", 0, 1, null, null);
             }
-            // Desde Habitacion Secreta: en (0,1) y W transita al siguiente nivel (Senior).
             if(room.equals("Habitacion Secreta") && direction.equals("W") && row == 0 && col == 1) {
                 return new DoorInfo("Sala Principal", 1, 1, null, "Senior");
             }
         }
         // --- MAPA SENIOR ---
         if(level.equals("Senior")) {
-            // Desde Sala Principal: si estás en (1,0) y presionas A, transita a Sala Exterior (aparece en (1,2)).
+            if(room.equals("Campos Elíseos") && direction.equals("W") && row == 0 && col == 1) {
+                return new DoorInfo("Salida Final", 2, 1, "tesoro del conocimiento,llave del conocimiento", null);
+            }
             if(room.equals("Sala Principal") && direction.equals("A") && row == 1 && col == 0) {
                 return new DoorInfo("Sala Exterior", 1, 2, null, null);
             }
-            // Bidireccional: Desde Sala Exterior: si estás en (1,2) y presionas D, regresa a Sala Principal (aparece en (1,0)).
             if(room.equals("Sala Exterior") && direction.equals("D") && row == 1 && col == 2) {
                 return new DoorInfo("Sala Principal", 1, 0, null, null);
             }
-            // Desde Sala Exterior: si estás en (1,0) y presionas A, transita a Campos Elíseos (aparece en (1,2)).
             if(room.equals("Sala Exterior") && direction.equals("A") && row == 1 && col == 0) {
                 return new DoorInfo("Campos Elíseos", 1, 2, null, null);
             }
-            // Bidireccional: Desde Campos Elíseos: si estás en (1,2) y presionas D, regresa a Sala Exterior (aparece en (1,0)).
             if(room.equals("Campos Elíseos") && direction.equals("D") && row == 1 && col == 2) {
                 return new DoorInfo("Sala Exterior", 1, 0, null, null);
             }
-            // Desde Sala Principal: si estás en (1,2) y presionas D, transita a Habitacion1 (aparece en (1,0)); requiere "llave secreta de snippet".
             if(room.equals("Sala Principal") && direction.equals("D") && row == 1 && col == 2) {
                 return new DoorInfo("Habitacion1", 1, 0, "llave secreta de snippet", null);
             }
-            // Bidireccional: Desde Habitacion1: si estás en (1,0) y presionas A, regresa a Sala Principal (aparece en (1,2)).
             if(room.equals("Habitacion1") && direction.equals("A") && row == 1 && col == 0) {
                 return new DoorInfo("Sala Principal", 1, 2, null, null);
             }
-            // Desde Habitacion1: si estás en (1,2) y presionas D, transita a Habitacion Secreta (aparece en (1,0)); sin bloqueo.
             if(room.equals("Habitacion1") && direction.equals("D") && row == 1 && col == 2) {
                 return new DoorInfo("Habitacion Secreta", 1, 0, null, null);
             }
-            // Bidireccional: Desde Habitacion Secreta: si estás en (1,0) y presionas A, regresa a Habitacion1 (aparece en (1,2)).
             if(room.equals("Habitacion Secreta") && direction.equals("A") && row == 1 && col == 0) {
                 return new DoorInfo("Habitacion1", 1, 2, null, null);
             }
-            // Desde Habitacion Secreta: si estás en (0,1) y presionas W, transita a Habitacion2 (aparece en (2,1)); sin bloqueo.
             if(room.equals("Habitacion Secreta") && direction.equals("W") && row == 0 && col == 1) {
                 return new DoorInfo("Habitacion2", 2, 1, null, null);
             }
-            // Bidireccional: Desde Habitacion2: si estás en (2,1) y presionas S, regresa a Habitacion Secreta (aparece en (0,1)).
             if(room.equals("Habitacion2") && direction.equals("S") && row == 2 && col == 1) {
                 return new DoorInfo("Habitacion Secreta", 0, 1, null, null);
             }
-            // Desde Habitacion Secreta: si estás en (2,1) y presionas S, transita a Habitacion3 (aparece en (0,1)); sin bloqueo.
             if(room.equals("Habitacion Secreta") && direction.equals("S") && row == 2 && col == 1) {
                 return new DoorInfo("Habitacion3", 0, 1, null, null);
             }
-            // Bidireccional: Desde Habitacion3: si estás en (0,1) y presionas W, regresa a Habitacion Secreta (aparece en (2,1)).
+            // Bidireccional: Desde Habitacion3: si estás en (0,1) y presionas W, regresa a Habitacion Secreta.
             if(room.equals("Habitacion3") && direction.equals("W") && row == 0 && col == 1) {
                 return new DoorInfo("Habitacion Secreta", 2, 1, null, null);
             }
         }
+
         return null;
     }
 
