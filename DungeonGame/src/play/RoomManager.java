@@ -1,46 +1,121 @@
 package play;
 
+import rooms.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RoomManager {
-    // Contenido de cada sala, si tiene (vacío = sin contenido)
-    private Map<String, String> roomContent = new HashMap<>();
+    // Map de salas: clave = level + "-" + room, valor = lista de eventos en esa sala
+    private Map<String, List<Room>> roomMap = new HashMap<>();
 
-    // Inicializa el contenido de cada sala (clave: level + "-" + room)
     public void initRoomContent() {
         // MAPA TRAINEE
-        roomContent.put("Trainee-Sala Principal", "");
-        roomContent.put("Trainee-Habitacion1", "llave secreta");
-        roomContent.put("Trainee-Habitacion Secreta", "tesoro del conocimiento");
+        List<Room> salaPrincipalTrainee = new ArrayList<>();
+        salaPrincipalTrainee.add(new EmptyRoom("Sala Principal"));
+        roomMap.put("Trainee-Sala Principal", salaPrincipalTrainee);
+
+        List<Room> habitacion1Trainee = new ArrayList<>();
+        habitacion1Trainee.add(new KeyRoom("llave secreta"));
+        habitacion1Trainee.add(new TreasureRoom());  // Tesoro que puede servir de escudo
+        habitacion1Trainee.add(new EnemyRoom());
+        roomMap.put("Trainee-Habitacion1", habitacion1Trainee);
+
+        List<Room> habitacionSecretaTrainee = new ArrayList<>();
+        habitacionSecretaTrainee.add(new KeyRoom("tesoro del conocimiento"));
+        roomMap.put("Trainee-Habitacion Secreta", habitacionSecretaTrainee);
 
         // MAPA JUNIOR
-        roomContent.put("Junior-Sala Principal", "");
-        roomContent.put("Junior-Habitacion1", "Tesoro Falso");
-        roomContent.put("Junior-Habitacion2", "Tesoro verdadero");
-        roomContent.put("Junior-Habitacion Secreta", "llave secreta");
+        List<Room> salaPrincipalJunior = new ArrayList<>();
+        salaPrincipalJunior.add(new EmptyRoom("Sala Principal"));
+        roomMap.put("Junior-Sala Principal", salaPrincipalJunior);
 
+        List<Room> habitacion1Junior = new ArrayList<>();
+        habitacion1Junior.add(new KeyRoom("Tesoro Falso"));
+        habitacion1Junior.add(new EnemyRoom());
+        roomMap.put("Junior-Habitacion1", habitacion1Junior);
+
+        List<Room> habitacion2Junior = new ArrayList<>();
+        habitacion2Junior.add(new KeyRoom("Tesoro verdadero"));
+        habitacion2Junior.add(new TreasureRoom());
+        roomMap.put("Junior-Habitacion2", habitacion2Junior);
+
+        List<Room> habitacionSecretaJunior = new ArrayList<>();
+        habitacionSecretaJunior.add(new KeyRoom("llave secreta"));
+        roomMap.put("Junior-Habitacion Secreta", habitacionSecretaJunior);
+
+       /* // MAPA SENIOR
+        List<Room> salaPrincipalSenior = new ArrayList<>();
+        salaPrincipalSenior.add(new EmptyRoom("Sala Principal"));
+        roomMap.put("Senior-Sala Principal", salaPrincipalSenior);
+
+        List<Room> salaExteriorSenior = new ArrayList<>();
+        salaExteriorSenior.add(new EmptyRoom("Sala Exterior"));
+        roomMap.put("Senior-Sala Exterior", salaExteriorSenior);
+
+        List<Room> camposElyseosSenior = new ArrayList<>();
+        camposElyseosSenior.add(new KeyRoom("llave secreta de snippet"));
+        roomMap.put("Senior-Campos Elíseos", camposElyseosSenior);
+
+        List<Room> habitacion1Senior = new ArrayList<>();
+        habitacion1Senior.add(new EmptyRoom("Habitacion1"));
+        roomMap.put("Senior-Habitacion1", habitacion1Senior);
+
+        List<Room> habitacionSecretaSenior = new ArrayList<>();
+        habitacionSecretaSenior.add(new KeyRoom("llave"));
+        roomMap.put("Senior-Habitacion Secreta", habitacionSecretaSenior);
+
+        List<Room> habitacion2Senior = new ArrayList<>();
+        habitacion2Senior.add(new TreasureRoom()); // Tesoro que puede servir de escudo o recuperar vida
+        roomMap.put("Senior-Habitacion2", habitacion2Senior);
+
+        List<Room> habitacion3Senior = new ArrayList<>();
+        habitacion3Senior.add(new KeyRoom("llave del conocimiento"));
+        roomMap.put("Senior-Habitacion3", habitacion3Senior);*/
         // MAPA SENIOR
-        roomContent.put("Senior-Sala Principal", "");
-        roomContent.put("Senior-Sala Exterior", "");
-        roomContent.put("Senior-Campos Elíseos", "llave secreta de snippet");
-        roomContent.put("Senior-Habitacion1", "");
-        roomContent.put("Senior-Habitacion Secreta", "llave");
-        roomContent.put("Senior-Habitacion2", "");
-        roomContent.put("Senior-Habitacion3", "llave del conocimiento");
+        List<Room> salaPrincipalSenior = new ArrayList<>();
+        salaPrincipalSenior.add(new EmptyRoom("Sala Principal"));
+        roomMap.put("Senior-Sala Principal", salaPrincipalSenior);
+
+        List<Room> salaExteriorSenior = new ArrayList<>();
+        salaExteriorSenior.add(new EmptyRoom("Sala Exterior"));
+        roomMap.put("Senior-Sala Exterior", salaExteriorSenior);
+
+        List<Room> camposElyseosSenior = new ArrayList<>();
+        camposElyseosSenior.add(new KeyRoom("llave secreta de snippet"));
+        roomMap.put("Senior-Campos Elíseos", camposElyseosSenior);
+
+        List<Room> habitacion1Senior = new ArrayList<>();
+        habitacion1Senior.add(new LockedRoom("Habitacion1", "llave secreta de snippet"));
+        roomMap.put("Senior-Habitacion1", habitacion1Senior);
+
+        List<Room> habitacionSecretaSenior = new ArrayList<>();
+        habitacionSecretaSenior.add(new KeyRoom("llave"));
+        roomMap.put("Senior-Habitacion Secreta", habitacionSecretaSenior);
+
+        List<Room> habitacion2Senior = new ArrayList<>();
+        habitacion2Senior.add(new TreasureRoom());
+        roomMap.put("Senior-Habitacion2", habitacion2Senior);
+
+        List<Room> habitacion3Senior = new ArrayList<>();
+        habitacion3Senior.add(new KeyRoom("llave del conocimiento"));
+        roomMap.put("Senior-Habitacion3", habitacion3Senior);
+
+
     }
 
-    // Verificar si existe contenido para una sala
-    public boolean hasContent(String key) {
-        return roomContent.containsKey(key);
+    public boolean hasRoom(String key) {
+        return roomMap.containsKey(key);
     }
 
-    // Obtener el contenido de una sala
-    public String getRoomContent(String key) {
-        return roomContent.get(key);
+    public List<Room> getRooms(String key) {
+        return roomMap.get(key);
     }
 
-    // Define la información de las puertas según el nivel, sala, dirección y posición actual.
+    // Método para obtener la información de la puerta (la parte de transición entre salas)
+    // Este método se puede mantener similar, pues sigue devolviendo un DoorInfo
     public DoorInfo getDoorInfo(String level, String room, String direction, int row, int col) {
         // --- MAPA TRAINEE ---
         if(level.equals("Trainee")) {

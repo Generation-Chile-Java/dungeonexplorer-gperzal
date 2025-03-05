@@ -15,9 +15,9 @@ public class LockedRoom implements Room {
     public void enter(Player player) {
         if (player.getInventory().contains(requiredKey)) {
             System.out.println("Has desbloqueado " + roomName + " usando " + requiredKey + ". ¡Puedes continuar!");
-            // Opcional: se podría cambiar el estado de la sala a un EmptyRoom o KeyRoom, según la lógica.
         } else {
             System.out.println(roomName + " está bloqueada. Necesitas " + requiredKey + " para entrar.");
         }
     }
+
 }

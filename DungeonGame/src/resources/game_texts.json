@@ -1,7 +1,7 @@
 {
   "intro": {
-    "hero": "¡Bienvenido, valiente Héroe {name}! Tu misión es encontrar la llave del tesoro y dominar los bugs que amenazan nuestro reino del código.",
-    "heroine": "¡Bienvenida, valiente Heroína {name}! Tu misión es encontrar la llave del tesoro y dominar los bugs que amenazan nuestro reino del código."
+    "hero": "¡Bienvenido, valiente Héroe {name}! \nEl Reino del Código, una vez próspero y lleno de armonía, ahora se encuentra al borde del colapso. \nLos temibles Bugs, criaturas maliciosas que corrompen la lógica y oscurecen la claridad del código, han invadido nuestras tierras. \nSu objetivo es apoderarse de los Tesoros Sagrados: el Tesoro del Conocimiento y la Llave del Conocimiento, \nartefactos ancestrales que mantienen el equilibrio y la sabiduría de nuestro mundo.\n\nTu misión, noble Héroe, es adentrarte en las profundidades de los Bosques de Sintaxis, \ncruzar los Ríos de Algoritmos y escalar las Montañas de Depuración para recuperar estos tesoros. \nEn tu camino, enfrentarás desafíos que pondrán a prueba tu ingenio, tu valentía y tu habilidad para resolver problemas. \nSolo dominando los Bugs y restaurando el orden en el código podrás salvar nuestro reino.\n\n\uD83C\uDF1F Recuerda: cada línea de código que repares, cada Bug que derrotes y cada pista que descifres te acercará más a tu objetivo. \nEl destino del Reino del Código está en tus manos. ⚙\uFE0F¡Que la lógica te guíe!\uD83D\uDCBB",
+    "heroine": "¡Bienvenida, valiente Heroína {name}! \nEl Reino del Código, una vez próspero y lleno de armonía, ahora se encuentra al borde del colapso. \nLos temibles Bugs, criaturas maliciosas que corrompen la lógica y oscurecen la claridad del código, han invadido nuestras tierras. \nSu objetivo es apoderarse de los Tesoros Sagrados: el Tesoro del Conocimiento y la Llave del Conocimiento, \nartefactos ancestrales que mantienen el equilibrio y la sabiduría de nuestro mundo.\n\nTu misión, noble Heroína, es adentrarte en las profundidades de los Bosques de Sintaxis, \ncruzar los Ríos de Algoritmos y escalar las Montañas de Depuración para recuperar estos tesoros. \nEn tu camino, enfrentarás desafíos que pondrán a prueba tu ingenio, tu valentía y tu habilidad para resolver problemas. \nSolo dominando los Bugs y restaurando el orden en el código podrás salvar nuestro reino.\n\n\uD83C\uDF1F Recuerda: cada línea de código que repares, cada Bug que derrotes y cada pista que descifres te acercará más a tu objetivo. \nEl destino del Reino del Código está en tus manos. ⚙\uFE0F¡Que la lógica te guíe!\uD83D\uDCBB"
   },
   "dialogues": {
     "trainee": {
@@ -15,9 +15,9 @@
           ],
           "correct": 2,
           "feedback": [
-            "Recuerda que el texto debe ir entre comillas.",
-            "El punto y coma es obligatorio para terminar la sentencia.",
-            "¡Correcto! Ambos errores son comunes en este ejemplo."
+            "\n\uD83D\uDDE3\uFE0F Recuerda que el texto debe ir entre comillas.",
+            "\n\uD83D\uDDE3\uFE0F El punto y coma es obligatorio para terminar la sentencia.",
+            "\n✨¡Lo estás haciendo genial! ✨ Ambos errores son comunes en este ejemplo."
           ]
         },
         {
@@ -29,9 +29,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! Se usa el símbolo = para asignar valores.",
-            "El operador == se utiliza para comparar, no para asignar.",
-            "El operador := no es válido en Java."
+            "\n✨¡Correcto!✨ Se usa el símbolo = para asignar valores.",
+            "\n\uD83D\uDDE3\uFE0FEl operador == se utiliza para comparar, no para asignar.",
+            "\n\uD83D\uDDE3\uFE0FEl operador := no es válido en Java."
           ]
         },
         {
@@ -43,9 +43,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! Se inicia un bloque de código con llaves {}.",
-            "Los paréntesis se usan para métodos y expresiones.",
-            "Los corchetes se utilizan para arrays."
+            "\n✨¡Vas por buen camino!✨ Se inicia un bloque de código con llaves {}.",
+            "\n\uD83D\uDDE3\uFE0F Los paréntesis se usan para métodos y expresiones.",
+            "\n\uD83D\uDDE3\uFE0F Los corchetes se utilizan para arrays."
           ]
         },
         {
@@ -57,9 +57,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! La palabra clave es 'class' en minúsculas.",
-            "Recuerda que en Java las palabras clave son sensibles a mayúsculas.",
-            "La opción 'clase' no es válida en Java."
+            "\n✨¡Correcto!✨ La palabra clave es 'class' en minúsculas.",
+            "\n\uD83D\uDDE3\uFE0F Recuerda que en Java las palabras clave son sensibles a mayúsculas.",
+            "\n\uD83D\uDDE3\uFE0F La opción 'clase' no es válida en Java."
           ]
         },
         {
@@ -71,9 +71,9 @@
           ],
           "correct": 1,
           "feedback": [
-            "Ese método no es el más habitual para la lectura de la consola.",
-            "¡Correcto! Se utiliza la clase Scanner.",
-            "No existe un método llamado Console.read() en Java estándar."
+            "\n\uD83D\uDDE3\uFE0F Ese método no es el más habitual para la lectura de la consola.",
+            "\n ✨¡Eres un crack!✨ Se utiliza la clase Scanner.",
+            "\n\uD83D\uDDE3\uFE0F No existe un método llamado Console.read() en Java estándar."
           ]
         }
       ]
@@ -89,9 +89,9 @@
           ],
           "correct": 1,
           "feedback": [
-            "Incorrecto, este método imprime sin salto de línea.",
-            "¡Correcto! System.out.println() imprime con salto de línea.",
-            "Console.log() no forma parte de Java."
+            "\n\uD83D\uDDE3\uFE0F Incorrecto, este método imprime sin salto de línea.",
+            "\n✨¡Sigue así!✨ System.out.println() imprime con salto de línea.",
+            "\n\uD83D\uDDE3\uFE0F Console.log() no forma parte de Java."
           ]
         },
         {
@@ -103,9 +103,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! Se declara de la forma int[] arr = new int[5];",
-            "Recuerda que los arreglos en Java se definen con [].",
-            "La palabra 'array' no es válida en Java."
+            "\n✨¡Increíble, sigue así!✨ Se declara de la forma int[] arr = new int[5];",
+            "\n\uD83D\uDDE3\uFE0F Recuerda que los arreglos en Java se definen con [].",
+            "\n\uD83D\uDDE3\uFE0F La palabra 'array' no es válida en Java."
           ]
         },
         {
@@ -117,9 +117,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! 'private' restringe el acceso a la clase.",
-            "El modificador 'public' permite acceso desde cualquier parte.",
-            "El modificador 'protected' permite acceso a clases derivadas."
+            "\n✨¡Lo estás haciendo genial!✨ 'private' restringe el acceso a la clase.",
+            "\n\uD83D\uDDE3\uFE0F El modificador 'public' permite acceso desde cualquier parte.",
+            "\n\uD83D\uDDE3\uFE0F El modificador 'protected' permite acceso a clases derivadas."
           ]
         },
         {
@@ -131,9 +131,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! Se utiliza 'extends' para heredar de una clase.",
-            "La palabra 'implements' se utiliza para implementar interfaces.",
-            "La palabra 'inherits' no existe en Java."
+            "\n✨¡Vas por buen camino!✨ Se utiliza 'extends' para heredar de una clase.",
+            "\n\uD83D\uDDE3\uFE0F La palabra 'implements' se utiliza para implementar interfaces.",
+            "\n\uD83D\uDDE3\uFE0F La palabra 'inherits' no existe en Java."
           ]
         },
         {
@@ -145,9 +145,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! Las interfaces se definen con la palabra clave 'interface'.",
-            "Una clase no es una interfaz.",
-            "El modificador abstract no se utiliza para definir interfaces."
+            "\n✨¡Eres un crack!✨ Las interfaces se definen con la palabra clave 'interface'.",
+            "\n\uD83D\uDDE3\uFE0F Una clase no es una interfaz.",
+            "\n\uD83D\uDDE3\uFE0F El modificador abstract no se utiliza para definir interfaces."
           ]
         }
       ]
@@ -163,9 +163,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! El polimorfismo permite esa flexibilidad.",
-            "El encapsulamiento se refiere a la ocultación de datos.",
-            "La herencia permite extender funcionalidades, pero no reutilizar el mismo método de forma polimórfica."
+            "\n✨¡Sigue así!✨ El polimorfismo permite esa flexibilidad.",
+            "\n\uD83D\uDDE3\uFE0F El encapsulamiento se refiere a la ocultación de datos.",
+            "\n\uD83D\uDDE3\uFE0F La herencia permite extender funcionalidades, pero no reutilizar el mismo método de forma polimórfica."
           ]
         },
         {
@@ -177,9 +177,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! Las interfaces permiten desacoplar componentes y promover la abstracción.",
-            "Al contrario, las interfaces ayudan a disminuir el acoplamiento.",
-            "El objetivo es escribir código limpio y modular, no más extenso."
+            "\n✨¡Lo estás haciendo genial!✨ Las interfaces permiten desacoplar componentes y promover la abstracción.",
+            "\n\uD83D\uDDE3\uFE0F Al contrario, las interfaces ayudan a disminuir el acoplamiento.",
+            "\n\uD83D\uDDE3\uFE0F El objetivo es escribir código limpio y modular, no más extenso."
           ]
         },
         {
@@ -191,9 +191,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! El polimorfismo permite que un objeto se comporte de diferentes maneras según su contexto.",
-            "Java no soporta herencia múltiple, por lo tanto esta opción es incorrecta.",
-            "El encapsulamiento es un concepto diferente."
+            "\n✨¡Vas por buen camino!✨ El polimorfismo permite que un objeto se comporte de diferentes maneras según su contexto.",
+            "\n\uD83D\uDDE3\uFE0F Java no soporta herencia múltiple, por lo tanto esta opción es incorrecta.",
+            "\n\uD83D\uDDE3\uFE0F El encapsulamiento es un concepto diferente."
           ]
         },
         {
@@ -205,9 +205,9 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! La encapsulación es la práctica de ocultar los detalles internos.",
-            "La herencia es otro concepto de la POO.",
-            "Eso se refiere al polimorfismo, no a la encapsulación."
+            "\n✨¡Eres un crack!✨ La encapsulación es la práctica de ocultar los detalles internos.",
+            "\n\uD83D\uDDE3\uFE0F La herencia es otro concepto de la POO.",
+            "\n\uD83D\uDDE3\uFE0F Eso se refiere al polimorfismo, no a la encapsulación."
           ]
         },
         {
@@ -219,15 +219,15 @@
           ],
           "correct": 0,
           "feedback": [
-            "¡Correcto! La abstracción busca simplificar la complejidad del sistema.",
-            "El objetivo es justamente lo opuesto.",
-            "La reutilización es un beneficio de otros conceptos, pero no el principal objetivo de la abstracción."
+            "\n ✨¡Sigue así!✨ La abstracción busca simplificar la complejidad del sistema.",
+            "\n\uD83D\uDDE3\uFE0F El objetivo es justamente lo opuesto.",
+            "\n\uD83D\uDDE3\uFE0F La reutilización es un beneficio de otros conceptos, pero no el principal objetivo de la abstracción."
           ]
         }
       ]
     },
     "final": {
-      "message": "¡Felicidades, {name}! Has completado los desafíos del reino del código, demostrando tu valía desde el nivel Trainee, pasando por Junior, hasta alcanzar el estatus Senior. Ahora estás listo para dar el siguiente paso: asumir roles de liderazgo en proyectos ambiciosos y enfrentar nuevas aventuras en el mundo del desarrollo. ¡Adelante, el futuro te espera!"
+      "message": "⭐⭐ ¡Felicidades, {name}! ⭐⭐ \nHas completado los desafíos del reino del código </> \uD83E\uDD16, demostrando tu valía desde el nivel Trainee, pasando por Junior, hasta alcanzar el estatus Senior. \nAhora estás listo para dar el siguiente paso: asumir roles de liderazgo en proyectos ambiciosos y enfrentar nuevas aventuras en el mundo del desarrollo. \n\uD83D\uDE80¡Adelante, el futuro te espera!\uD83D\uDE80"
     }
   }
 }

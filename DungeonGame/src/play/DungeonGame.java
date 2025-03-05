@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.util.HashSet;
 import java.util.Set;
 import com.google.gson.JsonObject;
+import rooms.Room;
+import player.Player;
 
 public class DungeonGame {
     // Estados del juego
@@ -11,17 +13,17 @@ public class DungeonGame {
     private String currentRoom = "Sala Principal";
     private int currentRow, currentCol; // posición en la sala (matriz 3x3)
 
-    // Inventario del jugador (se muestra solo al usar V)
-    private Set<String> inventory = new HashSet<>();
+    // Datos del jugador
     private String playerName;
+    private Player player;  // Objeto jugador
 
     // Salud del jugador (5 puntos = 5 corazones)
     private int health = 5;
 
-    // Registro de salas cuyo contenido ya fue recogido
+    // Registro de salas ya exploradas
     private Set<String> collectedRooms = new HashSet<>();
 
-    // Variable para almacenar la última puerta bloqueada
+    // Variable para almacenar la última puerta bloqueada (para transiciones)
     private DoorInfo lastLockedDoor = null;
 
     // Gestores de juego
@@ -29,27 +31,18 @@ public class DungeonGame {
     private GameTextManager textManager;
 
     public DungeonGame() {
-        // Inicializar los managers
         roomManager = new RoomManager();
         textManager = new GameTextManager();
     }
 
     public void initialize(Scanner scanner) {
-        // Cargar textos del juego
         textManager.loadGameTexts();
-
-        // Inicializar contenido de salas
         roomManager.initRoomContent();
-
-        // Configuración inicial
         setupInitialState();
-
-        // Configuración del jugador
         setupPlayer(scanner);
     }
 
     private void setupInitialState() {
-        // Establecer la sala inicial en posición central (1,1)
         currentRoom = "Sala Principal";
         currentRow = 1;
         currentCol = 1;
@@ -57,91 +50,81 @@ public class DungeonGame {
     }
 
     private void setupPlayer(Scanner scanner) {
-        // Introducción y selección de género y nombre
-        System.out.println("¡Bienvenido al Dungeon Game!");
-        System.out.println("\n1) Héroe  \n2) Heroína");
-        System.out.print("Selecciona tu género: ");
+        System.out.println("⚔️ ¡Bienvenido al Dungeon Game! 🏰");
+        System.out.println("\n1) 🏹 Héroe  \n2) 🎖️ Heroína");
+        System.out.print("🔵 Selecciona tu género: ");
         String genderChoice = scanner.nextLine();
         String gender = genderChoice.equals("1") ? "Héroe" : "Heroína";
 
-        System.out.print("Introduce tu nombre: ");
+        System.out.print("💬 Introduce tu nombre: ");
         playerName = scanner.nextLine();
 
-        // Mostrar intro según género elegido
+        // Crear el objeto Player
+        player = new Player(playerName, gender);
+
         String introMessage;
         JsonObject gameTexts = textManager.getGameTexts();
-        if(gender.equals("Héroe")) {
+        if (gender.equals("Héroe")) {
             introMessage = gameTexts.getAsJsonObject("intro").get("hero").getAsString();
         } else {
             introMessage = gameTexts.getAsJsonObject("intro").get("heroine").getAsString();
         }
         introMessage = introMessage.replace("{name}", playerName);
-        System.out.println(introMessage);
+        System.out.println("\n 📝 " + introMessage);
 
-        // Mostrar comandos disponibles
         printCommands();
     }
 
     private void printCommands() {
-        System.out.println("🎮 Comandos:");
-        System.out.println("  A: Izquierda, W: Arriba, D: Derecha, S: Abajo");
-        System.out.println("  F: Acción (recoger item/interactuar con puerta/encontrar enemigo)");
-        System.out.println("  V: Ver Inventario, X: Usar objeto (desbloquear puerta)");
+        System.out.println("\n🎮 Comandos:");
+        System.out.println("\uD83D\uDD79\uFE0F A: Izquierda, W: Arriba, D: Derecha, S: Abajo");
+        System.out.println("\uD83D\uDC49 F: Acción (recoger item/interactuar con puerta/encontrar enemigo)");
+        System.out.println("\uD83D\uDCE6 V: Ver Inventario, X: Usar objeto (desbloquear puerta)");
     }
 
     public void run() {
         Scanner scanner = new Scanner(System.in, "UTF-8");
         boolean gameOver = false;
-
-        while(!gameOver) {
-            // Mostrar estado actual
+        while (!gameOver) {
             displayGameState();
-
-            // Solicitar comando
-            System.out.print("Ingresa un comando: ");
+            System.out.print("🎮 Ingresa un comando: ");
             String command = scanner.nextLine().toUpperCase();
-
-            // Procesar comando
             gameOver = processCommand(command);
         }
+        scanner.close();
     }
 
     private void displayGameState() {
-        System.out.println("\nNivel: " + currentLevel + " | Sala: " + currentRoom);
+        System.out.println("\n\uD83D\uDC51 " + player.getGender() + ": " + player.getName() + " | 💻 Nivel: " + currentLevel + " | 🏰 Sala: " + currentRoom);
         printRoom();
-        System.out.println("Vida: " + getHealthDisplay());
+        System.out.println("💖 Vida: " + player.getHealthDisplay());
     }
 
-    private String getHealthDisplay() {
-        StringBuilder hearts = new StringBuilder();
-        for (int i = 0; i < health; i++) {
-            hearts.append("❤️");
-        }
-        return hearts.toString();
-    }
 
+    // Imprime el mapa 3x3 (posición actual del jugador)
     private void printRoom() {
+        System.out.println("🗺️ Mapa de Posición de la Zona:");
         for (int i = 0; i < 3; i++) {
             System.out.print("[ ");
             for (int j = 0; j < 3; j++) {
-                if(i == currentRow && j == currentCol)
-                    System.out.print("1 ");
+                if (i == currentRow && j == currentCol)
+                    System.out.print("👤 ");
                 else
-                    System.out.print("0 ");
+                    System.out.print("🌿 ");
             }
             System.out.println("]");
         }
     }
 
     private boolean processCommand(String command) {
-        switch(command) {
+        switch (command) {
             case "A": case "W": case "S": case "D":
                 return movePlayer(command);
             case "F":
                 performAction();
                 return false;
             case "V":
-                System.out.println("Inventario: " + inventory);
+                System.out.println("Inventario: " + player.getInventory());
                 return false;
             case "X":
                 return unlockDoor();
@@ -153,72 +136,57 @@ public class DungeonGame {
 
     private boolean movePlayer(String dir) {
         int newRow = currentRow, newCol = currentCol;
-
-        // Calcular nueva posición
-        switch(dir) {
+        switch (dir) {
             case "W": newRow--; break;
             case "S": newRow++; break;
             case "A": newCol--; break;
             case "D": newCol++; break;
         }
-
-        // Verificar si es un movimiento dentro de la sala
-        if(newRow >= 0 && newRow < 3 && newCol >= 0 && newCol < 3) {
+        if (newRow >= 0 && newRow < 3 && newCol >= 0 && newCol < 3) {
             currentRow = newRow;
             currentCol = newCol;
             return false;
         } else {
-            // Movimiento fuera de la sala: consultar puerta
             return tryDoorTransition(dir);
         }
     }
 
     private boolean tryDoorTransition(String direction) {
         DoorInfo door = roomManager.getDoorInfo(currentLevel, currentRoom, direction, currentRow, currentCol);
-
-        if(door == null) {
+        if (door == null) {
             System.out.println("No puedes moverte en esa dirección.");
             return false;
         }
-
-        // Verificar si la puerta necesita llave
-        if(door.requiredKey != null) {
+        if (door.requiredKey != null) {
             return handleLockedDoor(door);
         } else {
-            // Puerta sin llave, transición automática
             transitionDoor(door);
             return false;
         }
     }
 
     private boolean handleLockedDoor(DoorInfo door) {
-        if(door.requiredKey.contains(",")) {
-            // Múltiples llaves requeridas
+        if (door.requiredKey.contains(",")) {
             String[] keys = door.requiredKey.split(",");
             boolean hasAll = true;
-
-            for(String k : keys) {
-                if(!inventory.contains(k.trim())) {
+            for (String k : keys) {
+                if (!player.getInventory().contains(k.trim())) {
                     hasAll = false;
                     break;
                 }
             }
-
-            if(!hasAll) {
+            if (!hasAll) {
                 System.out.println("La puerta final está bloqueada. Necesitas " + door.requiredKey + " para abrirla.");
                 return false;
             }
-
             lastLockedDoor = door;
             System.out.println("La puerta final está bloqueada. Usa 'X' para usar tus llaves (" + door.requiredKey + ") y desbloquearla.");
             return false;
         } else {
-            // Una sola llave requerida
-            if(!inventory.contains(door.requiredKey)) {
+            if (!player.getInventory().contains(door.requiredKey)) {
                 System.out.println("La puerta está bloqueada. Necesitas " + door.requiredKey + " para abrirla.");
                 return false;
             }
-
             lastLockedDoor = door;
             System.out.println("La puerta está bloqueada. Usa 'X' para usar tu llave " + door.requiredKey + " y desbloquearla.");
             return false;
@@ -226,24 +194,20 @@ public class DungeonGame {
     }
 
     private boolean unlockDoor() {
-        if(lastLockedDoor == null) {
+        if (lastLockedDoor == null) {
             System.out.println("No hay ninguna puerta bloqueada a desbloquear.");
             return false;
         }
-
-        if(lastLockedDoor.requiredKey.contains(",")) {
-            // Múltiples llaves requeridas
+        if (lastLockedDoor.requiredKey.contains(",")) {
             String[] keys = lastLockedDoor.requiredKey.split(",");
             boolean hasAll = true;
-
-            for(String k : keys) {
-                if(!inventory.contains(k.trim())) {
+            for (String k : keys) {
+                if (!player.getInventory().contains(k.trim())) {
                     hasAll = false;
                     break;
                 }
             }
-
-            if(hasAll) {
+            if (hasAll) {
                 System.out.println("¡Has usado tus llaves (" + lastLockedDoor.requiredKey + ") para desbloquear la puerta!");
                 transitionDoor(lastLockedDoor);
                 lastLockedDoor = null;
@@ -251,8 +215,7 @@ public class DungeonGame {
                 System.out.println("No tienes todos los ítems necesarios para desbloquear la puerta.");
             }
         } else {
-            // Una sola llave requerida
-            if(inventory.contains(lastLockedDoor.requiredKey)) {
+            if (player.getInventory().contains(lastLockedDoor.requiredKey)) {
                 System.out.println("¡Has usado " + lastLockedDoor.requiredKey + " para desbloquear la puerta!");
                 transitionDoor(lastLockedDoor);
                 lastLockedDoor = null;
@@ -260,18 +223,15 @@ public class DungeonGame {
                 System.out.println("No tienes el item necesario para desbloquear la puerta.");
             }
         }
-
         return false;
     }
 
     private void transitionDoor(DoorInfo door) {
-        if(door.targetRoom.equals("Salida Final")) {
-            // Mostrar mensaje final personalizado
+        if (door.targetRoom.equals("Salida Final")) {
             showFinalMessage();
             System.exit(0);
         }
-
-        if(door.nextLevel != null) {
+        if (door.nextLevel != null) {
             System.out.println("¡Has transitado al siguiente nivel: " + door.nextLevel + "!");
             currentLevel = door.nextLevel;
             currentRoom = "Sala Principal";
@@ -294,9 +254,9 @@ public class DungeonGame {
     }
 
     private void performAction() {
-        // Caso especial para el nivel Senior en la Sala Principal
-        if(currentLevel.equals("Senior") && currentRoom.equals("Sala Principal") && currentRow == 1 && currentCol == 1) {
-            if(inventory.contains("llave del conocimiento")) {
+        // Caso especial para el nivel Senior en la Sala Principal (puerta final)
+        if (currentLevel.equals("Senior") && currentRoom.equals("Sala Principal") && currentRow == 1 && currentCol == 1) {
+            if (player.getInventory().contains("llave del conocimiento")) {
                 showFinalMessage();
                 System.exit(0);
             } else {
@@ -305,54 +265,52 @@ public class DungeonGame {
             return;
         }
 
-        // Acción normal en las salas
         String key = currentLevel + "-" + currentRoom;
-        if(roomManager.hasContent(key)) {
-            if(!collectedRooms.contains(key)) {
-                collectRoomContent(key);
+        if (roomManager.hasRoom(key)) {
+            java.util.List<Room> events = roomManager.getRooms(key);
+            if (events != null && !events.isEmpty()) {
+                double roll = Math.random(); // número entre 0 y 1
+                Room chosen = null;
+                if (roll < 0.05) {
+                    // 5% de probabilidad para TreasureRoom
+                    for (Room r : events) {
+                        if (r instanceof rooms.TreasureRoom) {
+                            chosen = r;
+                            break;
+                        }
+                    }
+                } else if (roll < 0.65) {
+                    // 65% de probabilidad para EnemyRoom
+                    for (Room r : events) {
+                        if (r instanceof rooms.EnemyRoom) {
+                            chosen = r;
+                            break;
+                        }
+                    }
+                } else {
+                    // 30% de probabilidad para KeyRoom (o similar, para progresar)
+                    for (Room r : events) {
+                        if (r instanceof rooms.KeyRoom) {
+                            chosen = r;
+                            break;
+                        }
+                    }
+                }
+                // Fallback: si no se encontró un evento del tipo deseado, se selecciona aleatoriamente
+                if (chosen == null) {
+                    int index = (int) (Math.random() * events.size());
+                    chosen = events.get(index);
+                }
+                chosen.enter(player);
+                events.remove(chosen); // Eliminamos el evento para que no se repita
+                collectedRooms.add(key);
             } else {
-                randomEncounter();
+                System.out.println("Esta sala ya fue completamente explorada.");
             }
         } else {
             System.out.println("No hay nada especial aquí.");
         }
     }
 
-    private void collectRoomContent(String key) {
-        String content = roomManager.getRoomContent(key);
 
-        if(content != null && !content.isEmpty()) {
-            System.out.println("¡Has encontrado " + content + "!");
-            inventory.add(content);
-            collectedRooms.add(key);
-        } else {
-            randomEncounter();
-        }
-    }
-
-    private void randomEncounter() {
-        double chance = Math.random();
-        if(chance < 0.3) {
-            enemyEncounter();
-        } else {
-            System.out.println("Esta sala ya fue explorada.");
-        }
-    }
-
-    private void enemyEncounter() {
-        System.out.println("¡Te has encontrado con un enemigo: Bug 👾!");
-        boolean correct = questions.QuestionPool.askQuestionForLevel(currentLevel);
-
-        if (!correct) {
-            health--;
-            System.out.println("Respuesta incorrecta. El Bug 👾 te ha atacado. ¡Has perdido 1 punto de vida!");
-
-            if(health <= 0) {
-                System.out.println("¡Has perdido toda tu vida! GAME OVER.");
-                System.exit(0);
-            }
-        } else {
-            System.out.println("¡Respuesta correcta! Has vencido al Bug 👾! ✅");
-        }
-    }
 }

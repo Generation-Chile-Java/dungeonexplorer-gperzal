@@ -17,11 +17,8 @@ public class EmptyRoom implements Room {
         // En Sala Principal del nivel Senior, por ejemplo, se podría verificar si se posee la "llave del conocimiento"
         if(name.equals("Sala Principal") && player.getInventory().contains("llave del conocimiento")) {
             System.out.println("Has usado la llave del conocimiento para abrir la puerta del conocimiento y obtener el Tesoro del Conocimiento. ¡FIN DEL JUEGO!");
-            // Aquí se podría marcar el juego como finalizado (ej. establecer un flag en el jugador)
+
         }
     }
 
-    public String getName() {
-        return name;
-    }
 }
